@@ -1,0 +1,22 @@
+装饰器本质上是一个 Python 函数或类，它可以让其他函数或类在不需要做任何代码修改的前提下增加额外功能，装饰器的返回值也是一个函数/类对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景，装饰器是解决这类问题的绝佳设计。有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码到装饰器中并继续重用。概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。
+
+
+使用装饰器极大地复用了代码，但是他有一个缺点就是原函数的元信息不见了，比如函数的docstring、__name__、参数列表，先看例子：
+
+from functools import wraps
+def logged(func):
+    @wraps(func)
+    def with_logging(*args, **kwargs):
+        print func.__name__      # 输出 'f'
+        print func.__doc__       # 输出 'does some math'
+        return func(*args, **kwargs)
+    return with_logging
+
+@logged
+def f(x):
+   """does some math"""
+   return x + x * x
+
+比如这个例子logged函数的返回修正是 with_logging，当执行with_logging时，就执行with_logging的主体，先打印两行日志信息，然后再执行函数func(*args,*kwargs)
+
+当f 里有参数，在执行时参数会传到到with_logging(*args,**kwargs)，并最终执行func(*args,**kwargs)

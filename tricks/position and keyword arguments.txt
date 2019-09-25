@@ -1,0 +1,59 @@
+https://treyhunner.com/2018/04/keyword-arguments-in-python/
+https://www.digitalocean.com/community/tutorials/how-to-use-args-and-kwargs-in-python-3
+
+Any keyword arguments you pass into this function will be placed into a dictionary named kwargs. You can examine the keys of this dictionary at run-time, like this:
+
+def my_function(**kwargs):
+    print str(kwargs)
+
+my_function(a=12, b="abc")
+
+{'a': 12, 'b': 'abc'}
+
+Understanding *args
+In Python, the single-asterisk form of *args can be used as a parameter to send a non-keyworded variable-length argument list to functions. It is worth noting that the asterisk (*) is the important element here, as the word args is the established conventional idiom, though it is not enforced by the language.
+
+Understanding **kwargs
+The double asterisk form of **kwargs is used to pass a keyworded, variable-length argument dictionary to a function. Again, the two asterisks (**) are the important element here, as the word kwargs is conventionally used, though not enforced by the language.
+
+Like *args, **kwargs can take however many arguments you would like to supply to it. However, **kwargs differs from *args in that you will need to assign keywords.
+
+Why use keyword arguments?
+When calling functions in Python, you¡¯ll often have to choose between using keyword arguments or positional arguments. Keyword arguments can often be used to make function calls more explicit.
+
+Take this code:
+
+def write_gzip_file(output_file, contents):
+    with GzipFile(None, 'wt', 9, output_file) as gzip_out:
+        gzip_out.write(contents)
+This takes a file object output_file and contents string and writes a gzipped version of the string to the output file.
+
+This code does the same thing but it uses keyword arguments instead of positional arguments:
+
+def write_gzip_file(output_file, contents):
+    with GzipFile(fileobj=output_file, mode='wt', compresslevel=9) as gzip_out:
+        gzip_out.write(contents)
+Notice that using this keyword argument call style made it more obvious what each of these three arguments represent.
+
+Where you see keyword arguments
+You¡¯ll likely see keyword arguments quite a bit in Python.
+
+Python has a number of functions that take an unlimited number of positional arguments. These functions sometimes have arguments that can be provided to customize their functionality. Those arguments must be provided as named arguments to distinguish them from the unlimited positional arguments.
+
+The built-in print function accepts the optional sep, end, file, and flush attributes as keyword-only arguments:
+
+>>> print('comma', 'separated', 'words', sep=', ')
+comma, separated, words
+
+Ordering Arguments
+When ordering arguments within a function or function call, arguments need to occur in a particular order:
+
+Formal positional arguments
+*args
+Keyword arguments
+**kwargs
+In practice, when working with explicit positional parameters along with *args and **kwargs, your function would look like this:
+
+def example(arg_1, arg_2, *args, **kwargs):
+...
+And, when working with positional parameters along with named keyword parameters in addition to *args and **kwargs, your function would look like this:

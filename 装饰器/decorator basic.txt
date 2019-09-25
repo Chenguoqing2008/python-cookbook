@@ -1,0 +1,54 @@
+Python decorator is a function that helps to add some additional functionalities to an already defined function. Python decorator is very helpful to add functionality to a function that is implemented before without making any change to the original function. Decorator is very efficient when want to give an updated code to an existing code.
+
+Python Decorator Example to handle exception
+The following code will print the value of an array with respect to its index.
+
+
+array = ['a', 'b', 'c']
+def valueOf(index):
+   print(array[index])
+valueOf(0)
+This will output:
+
+
+a
+But what if we call the function for,
+
+
+valueOf(10)
+This will output:
+
+
+Traceback (most recent call last):
+  File "D:/T_Code/Pythongenerator/array.py", line 4, in 
+    valueOf(10)
+  File "D:/T_Code/Pythongenerator/array.py", line 3, in valueOf
+    print(array[index])
+IndexError: list index out of range
+As we haven¡¯t handled whether the given index value exceeds the size of the array or not. So now we will decorate this function as following:
+
+
+array = ['a', 'b', 'c']
+
+
+def decorator(func):
+    def newValueOf(pos):
+        if pos >= len(array):
+            print("Oops! Array index is out of range")
+            return
+        func(pos)
+
+    return newValueOf
+
+
+@decorator
+def valueOf(index):
+    print(array[index])
+
+
+valueOf(10)
+Now it will output as below image.
+
+python decorator example exception handling
+
+So now we have handled the possible error of array out of bound exception. That¡¯s all about python decorator example and how it works.

@@ -1,0 +1,16 @@
+Using contextmanager to work with a file object
+
+set up(query) and tear done and exception such as file and database object
+scenarios:
+	open and close file
+	connect and close databasee
+	querying and releases locks
+
+with contextmanager we do not need worry about the set up and tear down
+
+with 语句块
+一旦我们获得了上下文对对象，就会调用__enter__()方法。它将完成with语句块执行前的所有准备工作。
+
+执行了with语句块。当with语句块执行结束，无论是“和谐地”还是由于异常，都会调用上下文对象的__exit__方法。
+
+编写上下文管理器的主要原理是你的代码会放到 with 语句块中执行。 当出现 with 语句的时候，对象的 __enter__() 方法被触发， 它返回的值(如果有的话)会被赋值给 as 声明的变量。然后，with 语句块里面的代码开始执行。 最后，__exit__() 方法被触发进行清理工作。

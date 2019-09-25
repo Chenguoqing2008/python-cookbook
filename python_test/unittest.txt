@@ -1,0 +1,17 @@
+import unittest
+
+naming convention
+	class TestClassName(unittest.TestCase)
+	test_classname(self)
+
+assertion
+	assertAlmostEqual
+	assertRaises(ValueError   ----  function argument assertion)
+	assertRaises(TypeError   ----  function argument type assertion)
+
+run
+python  -m unittest  name of the test module
+-m run the python module as script
+
+python -m unittest
+unittest discovery to run the unit test 

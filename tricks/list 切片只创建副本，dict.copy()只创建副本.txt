@@ -1,0 +1,34 @@
+list[:] 只创建原list的副本
+dict.copy 只创建dict的副本
+
+>>> list2 = ['test','abc']
+>>> list3 = list2
+>>> list2.append('hello')
+>>> print(list2)
+['test', 'abc', 'hello']
+>>> print(list3)
+['test', 'abc', 'hello']
+>>> list4 = list2[:]
+>>> list2.append('angle')
+>>> print(list2)
+['test', 'abc', 'hello', 'angle']
+>>> print(list4)
+['test', 'abc', 'hello']
+>>> print(list3)
+['test', 'abc', 'hello', 'angle']
+
+
+names = ['cold', 'night', 'linuxzen.com']
+>>> names2 = names[:]
+>>> names2.append('cold night')
+>>> names
+['cold', 'night', 'linuxzen.com']
+>>> names2
+['cold', 'night', 'linuxzen.com', 'cold night']
+>>> info = {'name':'cold night', 'blog':'www.linuxzen.com'}
+>>> info2 = info.copy()
+>>> info2['name'] = 'cold'
+>>> info
+{'blog': 'www.linuxzen.com', 'name': 'cold night'}
+>>> info2
+{'blog': 'www.linuxzen.com', 'name': 'cold'}

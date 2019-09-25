@@ -1,0 +1,31 @@
+闭包
+http://wiki.jikexueyuan.com/project/explore-python/Functional/closure.html
+
+工厂函数又叫闭包，它能够记住嵌套作用域的变量值的函数，尽管那个作用域或许已经不存在了。
+
+在 Python 中，函数也是一个对象。因此，我们在定义函数时，可以再嵌套定义一个函数，并将该嵌套函数返回，比如：
+
+from math import pow
+
+def make_pow(n):
+    def inner_func(x):     # 嵌套定义了 inner_func
+        return pow(x, n)   # 注意这里引用了外部函数的 n
+    return inner_func      # 返回 inner_func
+上面的代码中，函数 make_pow 里面又定义了一个内部函数 inner_func，然后将该函数返回。因此，我们可以使用 make_pow 来生成另一个函数：
+
+>>> pow2 = make_pow(2)  # pow2 是一个函数，参数 2 是一个自由变量
+>>> pow2
+<function inner_func at 0x10271faa0>
+>>> pow2(6)
+36.0
+我们还注意到，内部函数 inner_func 引用了外部函数 make_pow 的自由变量 n，这也就意味着，当函数 make_pow 的生命周期结束之后，n 这个变量依然会保存在 inner_func 中，它被 inner_func 所引用。
+
+>>> del make_pow         # 删除 make_pow
+>>> pow3 = make_pow(3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'make_pow' is not defined
+>>> pow2(9)     # pow2 仍可正常调用，自由变量 2 仍保存在 pow2 中
+81.0
+像上面这种情况，一个函数返回了一个内部函数，该内部函数引用了外部函数的相关参数和变量，我们把该返回的内部函数称为闭包（Closure）。
+

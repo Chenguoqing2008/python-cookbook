@@ -1,0 +1,19 @@
+So what is virtualenv? Virtualenv is a tool which allows us to make isolated python environments. Imagine you have an application that needs version 2 of a library, but another application requires version 3. How can you use and develop both these applications?
+
+If you install everything into /usr/lib/python2.7/site-packages (or whatever your platform¡¯s standard location is), it¡¯s easy to end up in a situation where you unintentionally upgrade a package.
+
+To install it, just type this command in the shell:
+
+$ pip install virtualenv
+The most important commands are:
+
+$ virtualenv myproject
+$ source myproject/bin/activate
+This first one makes an isolated virtualenv environment in the myproject folder and the second command activates that isolated environment.
+
+If you want your virtualenv to have access to your systems site-packages, use the --system-site-packages switch when creating your virtualenv like this:
+
+$ virtualenv --system-site-packages mycoolproject
+You can turn off the env by typing:
+
+$ deactivate

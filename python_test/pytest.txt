@@ -1,0 +1,12 @@
+sign group
+
+pytest -v -rxs -- print skip details
+@pytest.mark.skip
+@pytest.mark.skipif
+
+pytest -k multiply 
+-- run test case name contain multiply
+
+@pytest.mark.customize for example @pytest.mark.mac
+run   pytest -m mac -v
+         pytest -m "not mac" -v

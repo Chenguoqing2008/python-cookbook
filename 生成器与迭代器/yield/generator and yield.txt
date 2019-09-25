@@ -1,0 +1,19 @@
+Python generator is one of the most useful and special python function ever. We can turn a function to behave as an iterator using python generators.
+
+
+#sample syntax of python generator
+def gereratorName(argument):
+   #statements
+       yield argument
+   #statements
+
+
+#calling the generator
+variableName = gereratorName(10)
+print(variableName)
+
+In the above structure you can see that everything is just like a function except one thing, that is the yield keyword. This keyword plays the vital role. Only the usage of yield, changes a normal function into a generator.
+
+A normal function returns some value, generator yields some value. A generator automatically implements next() and _iter_.
+
+Remember range() is a built-in generator which generates number within the upper bound. Hope you can now write your own generator. 

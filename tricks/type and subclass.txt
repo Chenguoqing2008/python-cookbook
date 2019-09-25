@@ -1,0 +1,52 @@
+>>> tr1 = "test afd"
+
+>>> type(tr1)
+
+<class 'str'>
+
+>>> isinstance(tr1,str)
+
+True
+
+>>> type(tr1) is str
+
+True
+
+>>> str.__subclasses__()
+
+[]
+
+>>> int.__subclasses__()
+
+[<class 'bool'>]
+
+
+
+New-style classes (i.e. subclassed from object, which is the default in Python 3) have a __subclasses__ method which returns the subclasses:
+
+class Foo(object): pass
+class Bar(Foo): pass
+class Baz(Foo): pass
+class Bing(Bar): pass
+Here are the names of the subclasses:
+
+print([cls.__name__ for cls in Foo.__subclasses__()])
+# ['Bar', 'Baz']
+Here are the subclasses themselves:
+
+print(Foo.__subclasses__())
+# [<class '__main__.Bar'>, <class '__main__.Baz'>]
+Confirmation that the subclasses do indeed list Foo as their base:
+
+for cls in Foo.__subclasses__():
+    print(cls.__base__)
+# <class '__main__.Foo'>
+# <class '__main__.Foo'>
+Note if you want subsubclasses, you'll have to recurse:
+
+def all_subclasses(cls):
+    return set(cls.__subclasses__()).union(
+        [s for c in cls.__subclasses__() for s in all_subclasses(c)])
+
+print(all_subclasses(Foo))
+# {<class '__main__.Bar'>, <class '__main__.Baz'>, <class '__main__.Bing'>}

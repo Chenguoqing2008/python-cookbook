@@ -1,0 +1,8 @@
+抽象方法：
+抽象方法表示基类的一个方法，没有实现，所以基类不能实例化，子类实现了该抽象方法才能被实例化。
+Python的abc提供了@abstractmethod装饰器实现抽象方法，下面以Python3的abc模块举例。
+
+@abstractmethod：
+见下图的代码，基类Foo的fun方法被@abstractmethod装饰了，所以Foo不能被实例化；子类SubA没有实现基类的fun方法也不能被实例化；子类SubB实现了基类的抽象方法fun所以能实例化。
+
+https://blog.csdn.net/xiemanR/article/details/72629164

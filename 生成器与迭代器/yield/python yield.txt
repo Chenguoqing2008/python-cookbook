@@ -1,0 +1,23 @@
+到现在我们知道，要切换进程，必须发生上下文切换，而发生上下文切换只能有两种可能，一是
+一线程自愿放弃CPU而将控制权交给操作系统调度器，从而发生上下文切换；二
+是一个线程被强制放弃CPU而失去控制权。自愿放弃通过调用yield之类的操作系统调用用来实现；而强制放弃则需通过中断来实现，操作系统主要是通过周期性的时钟中断来获得CPU控制权。
+
+yield 向调用者发回一个结果对象，但是记住它离开的地方。像生成器这样的函数也可以通过yield语句来返回值，并挂起它们的状态以便稍后能够恢复状态。
+
+Generators are a simple and powerful tool for creating iterators. They are written like regular functions but use the yield statement whenever they want to return data. Each time next() is called on it, the generator resumes where it left off (it remembers all the data values and which statement was last executed). An example shows that generators can be trivially easy to create:
+
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+>>>
+>>> for char in reverse('golf'):
+...     print(char)
+...
+f
+l
+o
+g
+Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the __iter__() and __next__() methods are created automatically.
+
+yield 生成器博客
+http://liuzhijun.iteye.com/blog/1852369

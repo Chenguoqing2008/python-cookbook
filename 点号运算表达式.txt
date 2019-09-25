@@ -1,0 +1,3 @@
+在Python之中，可以使用点号运算语法object.attribute获取任意的object的attribute属性。
+
+点号运算其实就是表达式，传回和对象相配的属性名的值。例如，上一个例子中，表达式model2.sys会取出model2中赋值给sys的值。两样的，如果我们有内置的列表对象L, 而L.append会返回和该列表相关联的append方法对象。
