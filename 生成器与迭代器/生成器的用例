@@ -1,4 +1,4 @@
 生成器函数通过yield返回数据，与return不同的是，return语句一次返回所有数据，函数调用结束，而yield语句只返回一个元素数据，函数调用不会结束，
 只是暂停，直到__next__()方法被调用，程序继续执行，yield语句之后的语句代码。如图
 
-https://github.com/Chenguoqing2008/python-cookbook/blob/master/%E7%94%9F%E6%88%90%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/python%20yield.jpg
+注意：生成器特别适合用于遍历一些大序列对象，它无须将对象的所有元素都载入内存后才开始进行操作，仅在迭代至某个元素时才会将该元素载入内存。
