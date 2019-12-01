@@ -2,3 +2,14 @@
 只是暂停，直到__next__()方法被调用，程序继续执行，yield语句之后的语句代码。如图
 
 注意：生成器特别适合用于遍历一些大序列对象，它无须将对象的所有元素都载入内存后才开始进行操作，仅在迭代至某个元素时才会将该元素载入内存。
+
+增加一个简单的用例
+def generator():
+	for i in range(10):
+		yield i
+
+a = generator()		
+print(a)
+print(a.__next__())
+print(a.__next__())
+
