@@ -1,2 +1,116 @@
 attribute 是类中保存数据的变量，如果需要对attribute进行封装，那么在类的外部为了访问这些attribute，往往会提供一些setter和getter访问器。这些方法在创建和调用
 时都比较麻烦，于是Python又提供了property，property本质上就是setter或getter访问器，是一种方法。
+
+#@property可以将python定义的函数“当做”属性访问，从而提供更加友好访问方式，但是有时候setter/deleter也是需要的。
+#1、只有@property表示只读。
+#2、同时有@property和@x.setter表示可读可写。
+#3、同时有@property和@x.setter和@x.deleter表示可读可写可删除。
+
+
+class student(object):
+
+	def __init__(self,id):
+		self._id = id
+		
+	@property
+	def score(self):
+		return self._score
+		
+	@score.setter
+	def score(self,value):
+		self._score = value
+	
+	@property
+	def get_id(self):
+		return self._id
+		
+
+a = student(123)
+print(a.get_id)
+
+a.score = 30
+print(a.score)
+
+
+class A(object):
+
+	def __init__(self):
+		self.__name = None
+# 私用属性以两个下划线开头
+		
+	def getName(self):
+		return self.__name
+		
+	def setName(self,value):
+		self.__name = value
+
+	def delName(self):
+	    del self.__name
+	
+	name = property(getName,setName,delName)
+	
+a = A()
+print(a.name)
+a.name = 'Python'
+print(a.name)
+del a.name
+
+
+class B(object):
+
+	def __init__(self):
+		self.__name = None
+	
+	@property
+	def name(self):
+		return self.__name
+		
+	@name.setter
+	def name(self,value):
+		self.__name = value
+
+	@name.deleter
+	def name(self):
+	    del self.__name
+
+	
+b = B()
+print(b.name)
+b.name = 'Python'
+print(b.name)
+del b.name
+
+
+class test1:
+
+	def __init__(self):
+		self.__private = 'private 1'
+	
+	@property
+	def private(self):
+		return self.__private
+		
+	@private.setter
+	def private(self,value):
+		self.__private = value
+
+	@private.deleter
+	def private(self):
+	    del self.__private
+		
+
+t1 = test1()
+print(t1.private)
+print(t1.__dict__)
+t1.private = 'change 1'
+print(t1.private)
+print(t1.__dict__)
+t1.private = 'change 2'
+print(t1.private)
+print(t1.__dict__)
+del t1.private
+print(t1.__dict__)
+print(t1.private)
+	
+	
+		
