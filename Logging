@@ -1,0 +1,38 @@
+1. 如何声明
+   # 获取logger实例，如果参数为空则返回root logger
+   logger = logging.getLogger("AppName")
+   
+2. 日志格式化
+	formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
+
+3. 日志处理器
+
+   控制台
+   console_handler = logging.StreamHandler(sys.stdout)
+   console_handler.formatter = formatter  # 也可以直接给formatter赋值
+   
+   文件
+   file_handler = logging.FileHandler("test.log")
+   file_handler.setFormatter(formatter)  # 可以通过setFormatter指定输出格式
+   
+4. 为日志添加输出级别
+
+	logger.setLevel(logging.INFO)
+
+	logger.debug('this is debug info')
+
+	logger.info('this is information')
+
+	logger.warn('this is warning message')
+
+	logger.error('this is error message')
+
+	logger.fatal('this is fatal message, it is same as logger.critical')
+
+	logger.critical('this is critical message')
+	
+5. 为已经声明的日志添加处理器
+   logger.addHandler(file_handler)
+   logger.addHandler(console_handler)
+   
+4. 从配置文件加载配置项
