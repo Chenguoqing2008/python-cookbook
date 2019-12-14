@@ -1,0 +1,8 @@
+1. How to start jupyter notebook after installing Anaconda?
+jupyter notebook
+
+2. shift+enter activate the cell including the import
+如果import没有生效，应该要shift+enter让其生效
+
+3. auto-completion
+. then enter tab
