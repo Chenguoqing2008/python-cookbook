@@ -1,0 +1,3 @@
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+参数socket.AF_INET设置IP地址类型为IPV4，如果采用IPV6地址类型参数是socket.AF_INET6。参数socket.SOCK_STREAM设置Socket通信类型为TCP。
