@@ -54,4 +54,5 @@ Now it will output as below image.
 
 python decorator example exception handling
 
-So now we have handled the possible error of array out of bound exception. That is all about python decorator example and how it works.
+So now we have handled the possible error of array out of bound exception. That is all about python decorator example 
+and how it works.
