@@ -1,0 +1,67 @@
+生成器的进化
+
+3.1. 生成器的进化
+
+在 Python2.2 中，第一次引入了生成器，生成器实现了一种惰性、多次取值的方法，此时还是通过 next 构造生成迭代链或 next 进行多次取值。
+
+直到在 Python2.5 中，yield 关键字被加入到语法中，这时，生成器有了记忆功能，下一次从生成器中取值可以恢复到生成器上次 yield 执行的位置。
+
+之前的生成器都是关于如何构造迭代器，在 Python2.5 中生成器还加入了 send 方法，与 yield 搭配使用。
+
+我们发现，此时，生成器不仅仅可以 yield 暂停到一个状态，还可以往它停止的位置通过 send 方法传入一个值改变其状态。
+
+
+
+def jump_range(up_to):
+    step = 0
+    while step < up_to:
+        jump = yield step
+        print("jump", jump)
+        if jump is None:
+            jump = 1
+            step += jump
+            print("step", step)
+
+
+if __name__ == '__main__':
+    iterator = jump_range(10)
+    print(next(iterator))  # 0
+    print(iterator.send(4))  # jump 4; step 0
+    print(next(iterator))  # jump None; step 1; 1
+    print(iterator.send(-1))  # jump -1; 1
+
+在 Python3.3 中，生成器又引入了 yield from 关键字，yield from 实现了在生成器内调用另外生成器的功能，可以轻易的重构生成器，比如将多个生成器连接在一起执行。
+
+
+
+def gen_3():
+
+    yield 3
+
+
+
+def gen_234():
+
+    yield 2
+
+    yield from gen_3()
+
+    yield 4
+
+
+
+def main():
+
+    yield 1
+
+    yield from gen_234()
+
+    yield 5
+
+
+
+for element in main():
+
+    print(element)  # 1,2,3,4,5
+
+

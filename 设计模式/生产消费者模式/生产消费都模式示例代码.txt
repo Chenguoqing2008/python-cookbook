@@ -1,0 +1,56 @@
+生产者和消费者模型
+上面的例子中，代码中断-->切换执行，体现出了协程的部分特点。
+
+我们再举一个生产者、消费者的例子，这个例子来自廖雪峰的Python教程：
+
+传统的生产者-消费者模型是一个线程写消息，一个线程取消息，通过锁机制控制队列和等待，但一不小心就可能死锁。
+
+现在改用协程，生产者生产消息后，直接通过yield跳转到消费者开始执行，待消费者执行完毕后，切换回生产者继续生产，效率极高。
+
+
+def consumer():
+    print("[CONSUMER] start")
+    r = 'start'
+    while True:
+        n = yield r
+        if not n:
+            print("n is empty")
+            continue
+        print("[CONSUMER] Consumer is consuming %s" % n)
+        r = "200 ok"
+
+
+def producer(c):
+    # 启动generator
+    start_value = c.send(None)
+    print(start_value)
+    n = 0
+    while n < 3:
+        n += 1
+        print("[PRODUCER] Producer is producing %d" % n)
+        r = c.send(n)
+        print('[PRODUCER] Consumer return: %s' % r)
+    # 关闭generator
+    c.close()
+执行结果：
+
+
+[CONSUMER] start
+start
+[PRODUCER] producer is producing 1
+[CONSUMER] consumer is consuming 1
+[PRODUCER] Consumer return: 200 ok
+[PRODUCER] producer is producing 2
+[CONSUMER] consumer is consuming 2
+[PRODUCER] Consumer return: 200 ok
+[PRODUCER] producer is producing 3
+[CONSUMER] consumer is consuming 3
+[PRODUCER] Consumer return: 200 ok
+注意到consumer函数是一个generator，把一个consumer传入produce后：
+
+首先调用c.send(None)启动生成器；
+然后，一旦生产了东西，通过c.send(n)切换到consumer执行；
+consumer通过yield拿到消息，处理，又通过yield把结果传回；
+produce拿到consumer处理的结果，继续生产下一条消息；
+produce决定不生产了，通过c.close()关闭consumer，整个过程结束。
+整个流程无锁，由一个线程执行，produce和consumer协作完成任务，所以称为“协程”，而非线程的抢占式多任务。
