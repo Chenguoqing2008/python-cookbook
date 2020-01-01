@@ -1,0 +1,48 @@
+Python 中eval()函数将字符中str当成有效的表达式来求值并返回计算结果。其函数声明如下：
+eval(express[,globals[,locals]])
+如果传入globals参数的字典中缺少__buildins__的时候，当前的全局命名空间将作为globals参数输入并且在表达式计算之前被解析。locals参数默认与globals相同，如果两者都省略的话，表达式将在eval()调用的环境中执行。
+
+The arguments are a string and optional globals and locals. If provided, globals must be a dictionary. If provided, locals can be any mapping object.
+
+The expression argument is parsed and evaluated as a Python expression (technically speaking, a condition list) using the globals and locals dictionaries as global and local namespace. If the globals dictionary is present and lacks ‘__builtins__', the current globals are copied into globals before expression is parsed. This means that expression normally has full access to the standard builtins module and restricted environments are propagated. If the locals dictionary is omitted it defaults to the globals dictionary. If both dictionaries are omitted, the expression is executed in the environment where eval() is called. The return value is the result of the evaluated expression. Syntax errors are reported as exceptions. Example:
+
+eval函数在python中做数据类型的转换还是很有用的。它的作用就是把数据还原成它本身或者是能够转化成的数据类型。
+
+那么eval和ast.literal_val()的区别是什么呢？
+
+eval在做计算前并不知道需要转化的内容是不是合法的（安全的）python数据类型。只是在调用函数的时候去计算。如果被计算的内容不是合法的python类型就会抛出异常。
+
+ast.literal则会判断需要计算的内容计算后是不是合法的python类型，如果是则进行运算，否则就不进行运算。
+
+例子：
+#################################################
+字符串转换成列表
+>>>a = "[[1,2], [3,4], [5,6], [7,8], [9,0]]"
+>>>type(a)
+<type 'str'>
+>>> b = eval(a)
+>>> print b
+[[1, 2], [3, 4], [5, 6], [7, 8], [9, 0]]
+>>> type(b)
+<type 'list'>
+#################################################
+字符串转换成字典
+>>> a = "{1: 'a', 2: 'b'}"
+>>> type(a)
+<type 'str'>
+>>> b = eval(a)
+>>> print b
+{1: 'a', 2: 'b'}
+>>> type(b)
+<type 'dict'>
+#################################################
+字符串转换成元组
+>>> a = "([1,2], [3,4], [5,6], [7,8], (9,0))"
+>>> type(a)
+<type 'str'>
+>>> b = eval(a)
+>>> print b
+([1, 2], [3, 4], [5, 6], [7, 8], (9, 0))
+>>> type(b)
+<type 'tuple'>
+

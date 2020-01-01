@@ -1,0 +1,7 @@
+# coding = <encoding name>
+
+#! /usr/bin/python
+#  -*- coding: <encoding name> -*-
+
+#! /usr/bin/python
+# vim: set fileencoding=<encoding name>

@@ -1,0 +1,39 @@
+Python中哪些形式的数据为空。Python中以下数据会当作空来处理：
+常量 None
+常量 False
+任何形式的数值类型零,如 0、0L、0.0、0j
+空的序列，如''、()、[]
+空的字典、如{}
+当用户定义的类中定义了nonezero()方法和len()方法，并且该方法返回整数0或者布尔值False的时候
+
+>>> id(None)
+1385079952
+>>> None == 0
+False
+>>> None == ''
+False
+>>> None == False
+False
+>>> a = None
+>>> id(a)
+1385079952
+>>> a == b
+False
+>>> b = None
+>>> id(b)
+1385079952
+>>> a == b
+True
+>>> list1 = []
+>>> if list1 is not None:
+...     print("list is:",list1)
+... else:
+...     print("list is empty")
+...
+list is: []
+
+上面的例子对列表是否为空的判断显然不符合我们的要求，因为除非list1被赋值为None，否则else的语句永远不会被执行。正确的形式如下：
+if list1:
+    Do something
+else:
+    Don some other thing
