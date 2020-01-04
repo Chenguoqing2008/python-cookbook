@@ -1,0 +1,32 @@
+打开Anaconda Prompt（从window的开始菜单里面找）
+1.查看虚拟环境
+conda env list
+2.创建虚拟环境
+conda create -n django
+3.删除虚拟环境
+conda remove -n django --all
+---------------------------------------------------------------------
+下面是真正的创建步骤：
+
+新建虚拟环境
+(base) C:\Users\zdp>conda create -n django
+
+激活虚拟环境
+(base) C:\Users\zdp>avtivate django
+
+安装Django
+(django) c:\Users\zdp>conda install django
+
+进入项目文件夹路径
+(django) C:\Users\zdp>cd /d d:\PyPorjects\django
+
+创建Django1_prj项目
+(django) d:\PyPorjects\django>django-admin startproject django1_prj .
+
+创建数据库
+(django) d:\PyPorjects\django>python manage.py migrate
+
+运行Django1_prj项目服务器
+(django) d:\PyPorjects\django>python manage.py runserver
+
+注：如果http://127.0.0.1:8000/ 打不开，可以尝试先关掉代理工具，例如“小飞机”等等
